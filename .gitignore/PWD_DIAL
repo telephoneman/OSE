@@ -1,0 +1,17 @@
+int pwmPin = 9; // output pin supporting PWM
+int inPin = 3; // voltage connected to analog pin 3, e.g. a potentiometer
+int val = 0; // variable to store the read value
+float volt = 0; // variable to hold the voltage read
+void setup()
+{
+pinMode(pwmPin, OUTPUT); // sets the pin as output
+TCCR1B = TCCR1B & B11111000 | B00000001; // set 9 pins timer to 31372.55 Hz
+}
+
+void loop()
+{
+val = analogRead(inPin); // read the input pin
+volt =(5.0 * val) / 1023;
+val = 255 * (volt / 5);
+analogWrite(pwmPin, val);
+}
